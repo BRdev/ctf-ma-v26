@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge 2: Authentication</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="/dashboard"><< Back to Hub</a>
+        <h1>Challenge 2: Broken Authentication</h1>
+        <div class="card">
+            <p>This is the login portal for the school's BBQ Master. The attackers locked the real master out.</p>
+            <p>Can you bypass this login form? Word on the street is they didn't sanitize their database inputs very well...</p>
+        </div>
+        
+        <div class="card">
+            <h3>BBQ Master Login</h3>
+            
+            <% if (error) { %>
+                <div class="error"><%= error %></div>
+            <% } %>
+            
+            <% if (success) { %>
+                <div class="success"><%= success %></div>
+            <% } %>
+
+            <form action="/challenge/2/login" method="POST">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password">
+                </div>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge 1: Recon</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="/dashboard"><< Back to Hub</a>
+        <h1>Challenge 1: Reconnaissance</h1>
+        <div class="card">
+            <p>We found this landing page left by the attackers. It seems broken, but maybe they left some clues behind in the source code?</p>
+            <p>Good hackers always check what's hidden from plain sight.</p>
+        </div>
+        
+        <div class="terminal">
+            > Initializing scan...
+            > Scanning port 80... OPEN
+            > Scanning port 443... CLOSED
+            > Checking robots.txt... NOT FOUND
+            > Analyzing HTML structure... DONE
+        </div>
+        
+        <!-- Wow, you actually looked at the source code! Good job! -->
+        <!-- Your unique flag is: <%= flag %> -->
+        <!-- Next step: maybe check if the login page is vulnerable to basic SQL Injection? -->
+    </div>
+</body>
+</html>

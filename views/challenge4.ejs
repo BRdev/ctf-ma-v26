@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge 4: File Access</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="/dashboard"><< Back to Hub</a>
+        <h1>Challenge 4: Path Traversal</h1>
+        <div class="card">
+            <p>This internal tool allows employees to download the BBQ menu.</p>
+            <p>The developer used a very naive way to serve files. Can you manipulate the request to read <code>secret_bbq_recipe.txt</code> located in the parent directory?</p>
+        </div>
+        
+        <div class="card">
+            <h3>Download Files</h3>
+            <p><a href="/download?file=menu.txt" target="_blank">[ Download Menu ]</a></p>
+            
+            <form action="/download" method="GET" target="_blank">
+                <div class="form-group">
+                    <label for="file">Manual file request:</label>
+                    <input type="text" id="file" name="file" value="menu.txt">
+                </div>
+                <button type="submit">Fetch File</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

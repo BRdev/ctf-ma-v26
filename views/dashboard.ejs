@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission Hub - Operation: Save the BBQ!</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <span>Agent: <%= studentId %></span>
+            <a href="/logout-student">[ Disconnect ]</a>
+        </div>
+        
+        <h1>Mission Hub</h1>
+        
+        <div class="dashboard-grid">
+            <div class="challenge-card <%= progress.includes('RECON') ? 'solved' : '' %>">
+                <h3>Challenge 1: Recon</h3>
+                <p>The attackers left a trace. Inspect the perimeter.</p>
+                <a href="/challenge/1" target="_blank">[ Access System ]</a>
+            </div>
+            
+            <div class="challenge-card <%= progress.includes('SQLI') ? 'solved' : '' %>">
+                <h3>Challenge 2: Authentication</h3>
+                <p>The BBQ Master login portal. Can you bypass it?</p>
+                <a href="/challenge/2" target="_blank">[ Access System ]</a>
+            </div>
+            
+            <div class="challenge-card <%= progress.includes('IDOR') ? 'solved' : '' %>">
+                <h3>Challenge 3: Profiles</h3>
+                <p>The internal network. Someone must have left the secrets in their profile.</p>
+                <a href="/challenge/3" target="_blank">[ Access System ]</a>
+            </div>
+            
+            <div class="challenge-card <%= progress.includes('LFI') ? 'solved' : '' %>">
+                <h3>Challenge 4: File Access</h3>
+                <p>An old file viewer app. Maybe you can read something you shouldn't?</p>
+                <a href="/challenge/4" target="_blank">[ Access System ]</a>
+            </div>
+
+            <div class="challenge-card <%= progress.includes('COOKIE') ? 'solved' : '' %>">
+                <h3>Challenge 5: Cryptography</h3>
+                <p>The VIP lounge. Only administrators have the right credentials.</p>
+                <a href="/challenge/5" target="_blank">[ Access System ]</a>
+            </div>
+
+            <div class="challenge-card <%= progress.includes('BYPASS') ? 'solved' : '' %>">
+                <h3>Challenge 6: Ticket Shop</h3>
+                <p>Buy a ticket for the BBQ. You have 0 credits, can you get it for free?</p>
+                <a href="/challenge/6" target="_blank">[ Access System ]</a>
+            </div>
+        </div>
+
+        <div class="progress-section">
+            <h2>Flag Submission</h2>
+            <p>Submit your found flags here to check if they are correct. Once verified, copy them to Simulise!</p>
+            <div id="flag-result"></div>
+            <div class="form-group">
+                <input type="text" id="flag-input" placeholder="FLAG{...}" autocomplete="off">
+            </div>
+            <button onclick="submitFlag()">Verify Flag</button>
+        </div>
+    </div>
+
+    <script>
+        function submitFlag() {
+            const flag = document.getElementById('flag-input').value;
+            fetch('/verify-flag', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ flag })
+            })
+            .then(res => res.json())
+            .then(data => {
+                const resultDiv = document.getElementById('flag-result');
+                if (data.success) {
+                    resultDiv.innerHTML = `<div class="success">${data.message}</div>`;
+                    setTimeout(() => location.reload(), 1500);
+                } else {
+                    resultDiv.innerHTML = `<div class="error">${data.message}</div>`;
+                }
+            })
+            .catch(err => {
+                console.error(err);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge 6: Tickets</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="/dashboard"><< Back to Hub</a>
+        <h1>Challenge 6: Client-Side Validation Bypass</h1>
+        <div class="card">
+            <p>The attackers have set up a fake ticket shop for the BBQ. You need to buy a VIP ticket to get the final flag.</p>
+            <p>Problem: You have 0 credits, and the ticket costs 50 credits. Can you manipulate the request to get it for free?</p>
+        </div>
+        
+        <div class="card">
+            <h3>BBQ Ticket Shop</h3>
+            <p>Your Credits: <strong>0</strong></p>
+            
+            <% if (error) { %>
+                <div class="error"><%= error %></div>
+            <% } else if (flag) { %>
+                <div class="success">Ticket Purchased! Here is your flag: <%= flag %></div>
+            <% } %>
+
+            <form action="/challenge/6/buy" method="POST">
+                <div class="form-group">
+                    <label>Item: VIP BBQ Ticket</label>
+                    <input type="hidden" name="item" value="VIP Ticket">
+                </div>
+                <div class="form-group">
+                    <label>Price: 50 Credits</label>
+                    <!-- Is trusting the client with the price a good idea? -->
+                    <input type="hidden" name="price" value="50">
+                </div>
+                <button type="submit">Buy Ticket</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge 5: Cryptography</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="/dashboard"><< Back to Hub</a>
+        <h1>Challenge 5: Cryptographic Failures</h1>
+        <div class="card">
+            <p>Welcome to the VIP lounge. Only administrators are allowed to see the secret flag.</p>
+            <p>It looks like the developer used a very weak encoding method for the 'role' cookie instead of proper encryption.</p>
+        </div>
+        
+        <div class="card">
+            <h3>Access Panel</h3>
+            <% if (error) { %>
+                <div class="error"><%= error %></div>
+            <% } else if (flag) { %>
+                <div class="success">Welcome Admin! Here is your flag: <%= flag %></div>
+            <% } %>
+            
+            <p>Your current role according to your cookie is: <strong><%= role %></strong></p>
+            <p>Hint: Check your browser's Developer Tools (F12) -> Application/Storage -> Cookies.</p>
+            <form action="/challenge/5" method="GET">
+                <button type="submit">Refresh Page</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

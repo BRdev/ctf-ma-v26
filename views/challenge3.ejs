@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge 3: Profiles</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="/dashboard"><< Back to Hub</a>
+        <h1>Challenge 3: Broken Access Control</h1>
+        <div class="card">
+            <p>Welcome to the internal directory. You are currently viewing a profile.</p>
+            <p>Take a close look at the URL. Can you find the BBQ Master's profile?</p>
+        </div>
+        
+        <div class="card">
+            <% if (error) { %>
+                <div class="error"><%= error %></div>
+            <% } else if (profile) { %>
+                <h3>User Profile: <%= profile.username %></h3>
+                <p><strong>Role:</strong> <%= profile.role %></p>
+                <p><strong>Secret Info:</strong> <%= profile.secret_info %></p>
+            <% } %>
+        </div>
+        
+        <p><a href="/challenge/3?user_id=1">View Profile 1</a> | <a href="/challenge/3?user_id=3">View Profile 3</a></p>
+    </div>
+</body>
+</html>
