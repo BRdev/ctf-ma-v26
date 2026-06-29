@@ -74,6 +74,17 @@ Wanneer een student naar de applicatie gaat, vullen ze hun studentnummer in (bij
 5. Klik op "Buy Ticket".
 6. Omdat de server de negatieve of 0 waarde accepteert (en je 0 credits hebt), is de aankoop "succesvol" en krijg je de flag.
 
-## Flags Inleveren
+## Flags Inleveren & Controleren
 
 Studenten kunnen hun flags plakken op de "Mission Hub" (Dashboard) om direct feedback te krijgen of deze correct is. Zodra alle flags daar gevalideerd zijn, weten ze zeker dat ze de juiste oplossingen hebben om in te leveren in Simulise!
+
+### Docent Controle Tool
+
+Omdat de flags cryptografisch zijn versleuteld met het studentnummer (`FLAG{studentId_hash_CHALLENGE}`), kunnen ze niet worden afgekeken. Om u als docent te helpen controleren of een ingeleverde flag in Simulise legitiem is, kunt u het `verify_flags.js` script gebruiken:
+
+1. Open uw terminal in de projectmap.
+2. Voer het script uit met de ingeleverde flag:
+   ```bash
+   node verify_flags.js FLAG{123456_a1b2c3_RECON}
+   ```
+3. Het script controleert direct of de flag wiskundig klopt bij dat specifieke studentnummer.
