@@ -7,7 +7,7 @@ Dit document bevat de volledige walkthrough en oplossingen (spoilers) voor de do
 1. Open een terminal in de projectmap.
 2. Run `npm install` (als dat nog niet is gebeurd).
 3. Run `node server.js` of `npm start` om de server te starten.
-4. Ga naar `http://localhost:3000` in uw browser.
+4. Ga naar `http://localhost:3000` in je browser.
 
 ## Studenten Login & Unieke Flags
 
@@ -80,9 +80,9 @@ Studenten kunnen hun flags plakken op de "Mission Hub" (Dashboard) om direct fee
 
 ### Docent Controle Tool
 
-Omdat de flags cryptografisch zijn versleuteld met het studentnummer (`FLAG{studentId_hash_CHALLENGE}`), kunnen ze niet worden afgekeken. Om u als docent te helpen controleren of een ingeleverde flag in Simulise legitiem is, kunt u het `verify_flags.js` script gebruiken:
+Omdat de flags cryptografisch zijn versleuteld met het studentnummer (`FLAG{studentId_hash_CHALLENGE}`), kunnen ze niet worden afgekeken. Om je als docent te helpen controleren of een ingeleverde flag in Simulise legitiem is, kun je het `verify_flags.js` script gebruiken:
 
-1. Open uw terminal in de projectmap.
+1. Open je terminal in de projectmap.
 2. Voer het script uit met de ingeleverde flag:
    ```bash
    node verify_flags.js FLAG{123456_a1b2c3_RECON}
