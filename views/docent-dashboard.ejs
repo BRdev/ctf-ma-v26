@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docent Dashboard</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .result-box {
+            margin-top: 15px;
+            padding: 15px;
+            border: 1px dashed #333;
+            min-height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>[ DOCENT DASHBOARD ]</h1>
+        
+        <div class="card">
+            <h2>Flag Verificatie Tool</h2>
+            <p>Plak hier de flag van een student om te controleren of deze legitiem is.</p>
+            
+            <div class="form-group">
+                <input type="text" id="flag-input" placeholder="FLAG{123456_a1b2c3_RECON}" autocomplete="off">
+            </div>
+            <button onclick="verifyFlag()">Controleer Flag</button>
+            
+            <div id="result" class="result-box">
+                <em>Resultaat verschijnt hier...</em>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function verifyFlag() {
+            const flag = document.getElementById('flag-input').value.trim();
+            const resultDiv = document.getElementById('result');
+            
+            if(!flag) {
+                resultDiv.innerHTML = '<span class="error">Vul eerst een flag in.</span>';
+                return;
+            }
+            
+            resultDiv.innerHTML = '<em>Bezig met controleren...</em>';
+            
+            fetch('/docent-verify-flag', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ flag })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    resultDiv.innerHTML = `<span class="success" style="display:block;">${data.message}</span>`;
+                } else {
+                    resultDiv.innerHTML = `<span class="error" style="display:block;">${data.message}</span>`;
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                resultDiv.innerHTML = '<span class="error" style="display:block;">Er is een fout opgetreden bij de server.</span>';
+            });
+        }
+    </script>
+</body>
+</html>

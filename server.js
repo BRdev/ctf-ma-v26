@@ -48,6 +48,14 @@ function requireStudent(req, res, next) {
     next();
 }
 
+// Middleware to check if teacher is logged in
+function requireDocent(req, res, next) {
+    if (!req.signedCookies.docent) {
+        return res.redirect('/docent');
+    }
+    next();
+}
+
 // Routes
 app.get('/', (req, res) => {
     res.render('index');
@@ -208,6 +216,44 @@ app.post('/challenge/6/buy', requireStudent, (req, res) => {
         res.render('challenge6', { error: null, flag });
     } else {
         res.render('challenge6', { error: "Insufficient credits! You need " + price + " credits.", flag: null });
+    }
+});
+
+// Teacher (Docent) Routes
+app.get('/docent', (req, res) => {
+    res.render('docent-login', { error: null });
+});
+
+app.post('/docent-login', (req, res) => {
+    const { username, password } = req.body;
+    if (username === 'docent' && password === 'bbq') {
+        res.cookie('docent', 'true', { signed: true, httpOnly: true });
+        res.redirect('/docent-dashboard');
+    } else {
+        res.render('docent-login', { error: 'Ongeldige inloggegevens' });
+    }
+});
+
+app.get('/docent-dashboard', requireDocent, (req, res) => {
+    res.render('docent-dashboard');
+});
+
+app.post('/docent-verify-flag', requireDocent, (req, res) => {
+    const { flag } = req.body;
+    const match = flag.match(/^FLAG\{(.+?)_([a-f0-9]{6})_([A-Z]+)\}$/);
+    
+    if (!match) {
+        return res.json({ success: false, message: "Ongeldig flag formaat." });
+    }
+    
+    const studentId = match[1];
+    const challengeCode = match[3];
+    const expectedFlag = generateFlag(studentId, challengeCode);
+    
+    if (flag === expectedFlag) {
+        res.json({ success: true, message: `✅ SUCCES: Flag is legitiem voor student ${studentId} (Challenge: ${challengeCode})` });
+    } else {
+        res.json({ success: false, message: `❌ FOUT: Flag is nep of van iemand anders.` });
     }
 });
 

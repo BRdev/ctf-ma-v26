@@ -80,8 +80,14 @@ Studenten kunnen hun flags plakken op de "Mission Hub" (Dashboard) om direct fee
 
 ### Docent Controle Tool
 
-Omdat de flags cryptografisch zijn versleuteld met het studentnummer (`FLAG{studentId_hash_CHALLENGE}`), kunnen ze niet worden afgekeken. Om je als docent te helpen controleren of een ingeleverde flag in Simulise legitiem is, kun je het `verify_flags.js` script gebruiken:
+Omdat de flags cryptografisch zijn versleuteld met het studentnummer (`FLAG{studentId_hash_CHALLENGE}`), kunnen ze niet worden afgekeken. Om je als docent te helpen controleren of een ingeleverde flag in Simulise legitiem is, zijn er twee opties:
 
+**Optie 1: Via de webinterface (Aanbevolen)**
+1. Ga naar `http://localhost:3000/docent` in je browser.
+2. Log in met gebruikersnaam `docent` en wachtwoord `bbq`.
+3. Plak de flag in de Flag Verificatie Tool op het dashboard om hem direct te controleren.
+
+**Optie 2: Via de terminal**
 1. Open je terminal in de projectmap.
 2. Voer het script uit met de ingeleverde flag:
    ```bash
